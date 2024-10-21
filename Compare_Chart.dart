@@ -15,19 +15,24 @@ class CompareChart extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20),
               Text(
-                'Expense vs Income',
+                'Compare Chart',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              Text(
+                'Show Expenses Incomes',
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
             ],
           ),
-          SizedBox(height: 80),
+          SizedBox(height: 70),
           Container(
             height: 300,
             width: 300,
