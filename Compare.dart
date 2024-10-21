@@ -106,7 +106,8 @@ class _ComparePageState extends State<ComparePage> {
           ),
 
         ],
-      ),      body: Column(
+      ),
+      body: Column(
       children: [
         // Custom date selection
         if (selectedPeriod == 'Custom') ...[
@@ -116,7 +117,7 @@ class _ComparePageState extends State<ComparePage> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 gradient: LinearGradient(
-                  colors: [Colors.blue, Colors.green], // ไล่สีจากฟ้าไปเขียว
+                  colors: [Colors.red.shade100, Colors.green.shade100], // ไล่สีจากฟ้าไปเขียว
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 ),
@@ -133,16 +134,12 @@ class _ComparePageState extends State<ComparePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Start Date:',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-                            ),
                             SizedBox(height: 4),
                             Text(
                               startDate != null
-                                  ? DateFormat('yyyy-MM-dd').format(startDate!)
+                                  ? DateFormat('dd MMM yyyy').format(startDate!)
                                   : 'Select a date',
-                              style: TextStyle(fontSize: 16, color: Colors.white70),
+                              style: TextStyle(fontSize: 16, color: Colors.black),
                             ),
                             SizedBox(height: 8),
                             ElevatedButton.icon(
@@ -163,7 +160,7 @@ class _ComparePageState extends State<ComparePage> {
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white, // สีปุ่มเป็นสีขาว
-                                foregroundColor: Colors.blue, // สีข้อความในปุ่ม
+                                foregroundColor: Colors.black, // สีข้อความในปุ่ม
                                 padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                               ),
                             ),
@@ -175,16 +172,12 @@ class _ComparePageState extends State<ComparePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'End Date:',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-                            ),
                             SizedBox(height: 4),
                             Text(
                               endDate != null
-                                  ? DateFormat('yyyy-MM-dd').format(endDate!)
+                                  ? DateFormat('dd MMM yyyy').format(endDate!)
                                   : 'Select a date',
-                              style: TextStyle(fontSize: 16, color: Colors.white70),
+                              style: TextStyle(fontSize: 16, color: Colors.black),
                             ),
                             SizedBox(height: 8),
                             ElevatedButton.icon(
@@ -205,7 +198,7 @@ class _ComparePageState extends State<ComparePage> {
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white, // สีปุ่มเป็นสีขาว
-                                foregroundColor: Colors.green, // สีข้อความในปุ่ม
+                                foregroundColor: Colors.black, // สีข้อความในปุ่ม
                                 padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                               ),
                             ),
