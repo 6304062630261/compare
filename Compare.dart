@@ -117,7 +117,7 @@ class _ComparePageState extends State<ComparePage> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 gradient: LinearGradient(
-                  colors: [Colors.red.shade100, Colors.green.shade100], // ไล่สีจากฟ้าไปเขียว
+                  colors: [Colors.red.shade100, Colors.green.shade100],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 ),
@@ -268,7 +268,8 @@ class _ComparePageState extends State<ComparePage> {
             ),
           ),
 
-      ] else if (selectedPeriod == 'Month') ...[
+      ]
+        else if (selectedPeriod == 'Month') ...[
           Container(
             height: 80,
             child: ListView.builder(
@@ -319,7 +320,8 @@ class _ComparePageState extends State<ComparePage> {
               },
             ),
           ),
-        ] else if (selectedPeriod == 'Year') ...[
+        ]
+        else if (selectedPeriod == 'Year') ...[
           Container(
             height: 80,
             child: ListView.builder(
