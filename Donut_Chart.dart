@@ -1,4 +1,3 @@
-// pie_chart_widget.dart
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart'; // สำหรับ format currency
@@ -14,31 +13,31 @@ class PieChartWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildTitle(),
-            Column(
-              children: [
-                Container(
-                  height: 300,
-                  child: PieChart(
-                    PieChartData(
-                      sections: pieChartSections,
-                      centerSpaceRadius: 40,
-                      sectionsSpace: 2,
-                    ),
-                  ),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 50),
+            _buildTitle(),
+            Container(
+              height: 300,
+              child: PieChart(
+                PieChartData(
+                  sections: pieChartSections,
+                  centerSpaceRadius: 40,
+                  sectionsSpace: 2,
                 ),
-                SizedBox(height: 5),
-                _buildIndicator(pieChartSections),
-              ],
+              ),
             ),
-          SizedBox(height: 30),
-        ],
+            SizedBox(height: 5),
+            _buildIndicator(pieChartSections),
+            SizedBox(height: 30),
+          ],
+        ),
       ),
     );
   }
+
   final Map<String, Color> typeToColor = {
     'Food': Colors.blueAccent,
     'Travel expenses': Colors.lightGreenAccent,
@@ -51,15 +50,12 @@ class PieChartWidget extends StatelessWidget {
     'Beauty expenses': Colors.black,
     'Cost of equipment': Colors.blue.shade100,
     'Other': Colors.teal.shade400,
-    'Internet cost':Colors.pink,
-
-
-
+    'Internet cost': Colors.pink,
   };
+
   List<PieChartSectionData> _createPieChartSections() {
     return dataMap.entries.map((entry) {
       return PieChartSectionData(
-        //color: Colors.primaries[dataMap.keys.toList().indexOf(entry.key) % Colors.primaries.length],
         color: typeToColor[entry.key] ?? Colors.grey,
         value: entry.value,
         title: entry.key,
@@ -81,7 +77,7 @@ class PieChartWidget extends StatelessWidget {
           ),
         ),
         Text(
-          'Show Expenses',
+          'Show expense types',
           style: TextStyle(
             fontSize: 18,
           ),
@@ -105,9 +101,13 @@ class PieChartWidget extends StatelessWidget {
               ),
             ),
             SizedBox(width: 8),
-            Text(
-            '${section.title.split('\n')[0]} ${NumberFormat('#,##0.00').format(section.value)}',
-            style: TextStyle(fontSize: 18),
+            Expanded( // ใช้ Expanded เพื่อให้ข้อความปรับขนาด
+              child: Text(
+                '${section.title} ${NumberFormat('#,##0.00').format(section.value)}',
+                style: TextStyle(fontSize: 20),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
             ),
           ],
         );

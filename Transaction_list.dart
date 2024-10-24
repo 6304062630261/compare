@@ -8,36 +8,40 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // คำนวณยอดรวมของรายจ่ายและรายรับ
     double totalIncome = 0;
+    double totalExpense = 0;
 
-
-    // คำนวณยอดรวมของรายรับและรายจ่าย
     transactions.values.forEach((transactionList) {
       for (var item in transactionList) {
         if (item['type_transaction'] == 'IC') {
           totalIncome += item['amount_transaction'];
+        } else {
+          totalExpense += item['amount_transaction'];
         }
       }
     });
+
     return Column(
       children: [
-        // แสดงกลุ่มของ wallet และ Total Income
         Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-
               _buildTotalCard(
                 title: 'Total Income',
                 amount: totalIncome,
                 color: Colors.green[50]!,
               ),
               SizedBox(height: 8.0),
+              _buildTotalCard(
+                title: 'Total Expense',
+                amount: totalExpense,
+                color: Colors.red[50]!,
+                isNegative: true,
+              ),
             ],
           ),
         ),
-        // แสดงรายการธุรกรรม
         Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -55,13 +59,10 @@ class TransactionList extends StatelessWidget {
         ),
       ],
     );
-
-
-
   }
 
   Widget _buildTotalCard({required String title, required double amount, required Color color, bool isNegative = false}) {
-    String formattedAmount = NumberFormat('#,##0.00').format(amount); // ใช้ NumberFormat
+    String formattedAmount = NumberFormat('#,##0.00').format(amount);
 
     return Card(
       elevation: 4,
@@ -76,7 +77,7 @@ class TransactionList extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Text(
-              '${isNegative ? '-' : ''}$formattedAmount', // ใช้ formattedAmount
+              '${isNegative ? '-' : ''}$formattedAmount',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ],
@@ -94,7 +95,6 @@ class TransactionList extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // วันที่
             Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(vertical: 12.0),
@@ -108,8 +108,7 @@ class TransactionList extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(height: 8.0), // เพิ่มระยะห่างระหว่างวันที่และรายการธุรกรรม
-            // แสดงรายการธุรกรรม
+            SizedBox(height: 8.0),
             Column(
               children: transactionList.map((item) {
                 return _buildTransactionItem(item);
@@ -122,11 +121,9 @@ class TransactionList extends StatelessWidget {
   }
 
   Widget _buildTransactionItem(Map<String, dynamic> item) {
-    // แปลงวันที่เป็นรูปแบบที่ต้องการ
     DateTime transactionDate = DateTime.parse(item['date_user']);
     String formattedDate = DateFormat('d MMM yyyy').format(transactionDate);
 
-    // เลือกรูปภาพตามประเภทของธุรกรรม
     String imagePath;
     switch (item['type_transaction']) {
       case 'IC':
@@ -167,7 +164,7 @@ class TransactionList extends StatelessWidget {
     }
 
     Color amountColor = item['type_transaction'] == 'IC' ? Colors.green : Colors.red;
-    String formattedAmount = NumberFormat('#,##0.00').format(item['amount_transaction']); // ใช้ NumberFormat
+    String formattedAmount = NumberFormat('#,##0.00').format(item['amount_transaction']);
 
     return ListTile(
       contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -209,6 +206,7 @@ class TransactionList extends StatelessWidget {
           Text(
             '\$${formattedAmount}', // ใช้ formattedAmount
             style: TextStyle(color: amountColor, fontWeight: FontWeight.bold),
+            maxLines: 2,
           ),
         ],
       ),

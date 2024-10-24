@@ -30,7 +30,7 @@ class _ChartPageState extends State<ChartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Type Expense Chart')),
+        title: Center(child: Text('Chart')),
         elevation: 500.0,
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -67,7 +67,7 @@ class _ChartPageState extends State<ChartPage> {
                      }
                 }
               });
-    
+
     //_scrollToCurrentDate(); // เลื่อนตำแหน่งไปที่วันปัจจุบันเมื่อเปลี่ยน period
             },
             itemBuilder: (BuildContext context) {
@@ -332,6 +332,7 @@ class _ChartPageState extends State<ChartPage> {
                 ),
               ),
             ],
+
           Expanded(
             child: FutureBuilder<List<Map<String, dynamic>>>(
               future: fetchData(),
